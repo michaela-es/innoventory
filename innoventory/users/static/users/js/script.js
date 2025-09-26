@@ -1,79 +1,56 @@
 document.addEventListener('DOMContentLoaded', function() {
-  const form = document.getElementById('registerForm');
-  const inputs = form.querySelectorAll('input, select');
+    const inputs = form.querySelectorAll('input, select');
+    const form = document.getElementById('registerForm');
 
-  // Add floating label effect
-  inputs.forEach(input => {
-    const label = input.parentElement.querySelector('label');
 
-    // Check if input has value on load
-    if (input.value) {
-      label.style.transform = 'translateY(-10px)';
-      label.style.fontSize = '14px';
-    }
+    // Form validation and submission
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
 
-    input.addEventListener('focus', function() {
-      label.style.transform = 'translateY(-10px)';
-      label.style.fontSize = '14px';
-      label.style.color = '#f8b237';
-    });
+        const formData = new FormData(form);
+        const password = formData.get('password');
+        const confirmPassword = formData.get('confirmPassword');
 
-    input.addEventListener('blur', function() {
-      if (!input.value) {
-        label.style.transform = 'translateY(0)';
-        label.style.fontSize = '20px';
-      }
-      label.style.color = '#567b8c';
-    });
-  });
+        // Check if passwords match
+        if (password !== confirmPassword) {
+            alert('Passwords do not match!');
+            return;
+        }
 
-  // Form validation and submission
-  form.addEventListener('submit', function(e) {
-    e.preventDefault();
+        // Check password strength
+        if (password.length < 6) {
+            alert('Password must be at least 6 characters long!');
+            return;
+        }
 
-    const formData = new FormData(form);
-    const password = formData.get('password');
-    const confirmPassword = formData.get('confirmPassword');
+        // Simulate form submission
+        const submitBtn = form.querySelector('.sign-in-btn');
+        const originalText = submitBtn.querySelector('.text-wrapper-5').textContent;
 
-    // Check if passwords match
-    if (password !== confirmPassword) {
-      alert('Passwords do not match!');
-      return;
-    }
+        submitBtn.querySelector('.text-wrapper-5').textContent = 'Signing Up...';
+        submitBtn.disabled = true;
 
-    // Check password strength
-    if (password.length < 6) {
-      alert('Password must be at least 6 characters long!');
-      return;
-    }
+        setTimeout(() => {
+              alert('Registration successful!');
+              submitBtn.querySelector('.text-wrapper-5').textContent = originalText;
+              submitBtn.disabled = false;
+              form.reset();
 
-    // Simulate form submission
-    const submitBtn = form.querySelector('.sign-in-btn');
-    const originalText = submitBtn.querySelector('.text-wrapper-5').textContent;
-
-    submitBtn.querySelector('.text-wrapper-5').textContent = 'Signing Up...';
-    submitBtn.disabled = true;
-
-    setTimeout(() => {
-      alert('Registration successful!');
-      submitBtn.querySelector('.text-wrapper-5').textContent = originalText;
-      submitBtn.disabled = false;
-      form.reset();
-
-      // Reset labels
-      inputs.forEach(input => {
-        const label = input.parentElement.querySelector('label');
-        label.style.transform = 'translateY(0)';
-        label.style.fontSize = '20px';
-        label.style.color = '#567b8c';
-      });
-    }, 2000);
-  });
+          // Reset labels
+          inputs.forEach(input => {
+                const label = input.parentElement.querySelector('label');
+                label.style.transform = 'translateY(0)';
+                label.style.fontSize = '20px';
+                label.style.color = '#567b8c';
+          });
+        }, 2000);
+ });
 
   // Login link functionality
-  const loginLink = document.querySelector('.text-wrapper-4');
-  loginLink.addEventListener('click', function(e) {
-    e.preventDefault();
-    alert('Redirecting to login page...');
-  });
+
+    const loginLink = document.querySelector('.text-wrapper-4');
+    loginLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        alert('Redirecting to login page...');
+    });
 });
