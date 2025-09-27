@@ -2,7 +2,9 @@ from django.shortcuts import render
 from django.db import connection
 from django.db.utils import OperationalError
 from django.contrib import messages
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth import authenticate, login as django_login
+
 
 def home(request):
     try:
