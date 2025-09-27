@@ -1,0 +1,299 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: #ffffff;
+    color: #2f4156;
+    line-height: 1.5;
+}
+
+/* Design system colors */
+:root {
+    --form-panel: #567b8c;
+    --form-input-bg: #f5f5f5;
+    --form-text: #2f4156;
+    --form-accent: #f8b237;
+    --form-accent-hover: #e6a032;
+    --form-border: #567b8c;
+    --form-focus: #f8b237;
+    --form-shadow: #567b8c;
+}
+
+/* Main container - REVERSED ORDER */
+.register-container {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    overflow: hidden;
+    flex-direction: row-reverse; /* This puts form on left, blue panel on right */
+}
+
+/* Blue panel - Right side */
+.blue-panel {
+    width: 624px;
+    height: 100vh;
+    background-color: var(--form-panel);
+}
+
+/* Form panel - Left side */
+.form-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 4rem;
+    position: relative;
+}
+
+/* Header */
+.header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.header h1 {
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--form-text);
+    margin-bottom: 0.5rem;
+}
+
+.header p {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--form-accent);
+}
+
+/* Form */
+.register-form {
+    max-width: 712px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* Form grid */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+/* Form groups */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.input-label {
+    display: block;
+    color: var(--form-border);
+    font-size: 20px;
+    font-weight: 400;
+    margin-bottom: 0.75rem;
+}
+
+/* Input field with shadow */
+.input-container {
+    position: relative;
+    width: 100%;
+    min-height: 69px;
+}
+
+.input-shadow {
+    position: absolute;
+    top: 8px;
+    left: 4px;
+    width: 100%;
+    height: 69px;
+    background-color: var(--form-shadow);
+    border-radius: 29px;
+    z-index: 1;
+}
+
+/* Style ALL form inputs including password fields */
+.form-input, .form-select, input[type="text"], input[type="email"], input[type="password"], input[type="tel"], select {
+    position: relative;
+    width: 100%;
+    height: 69px;
+    background-color: var(--form-input-bg);
+    border-radius: 29px;
+    border: 1px solid var(--form-border);
+    padding: 20px 25px;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    color: var(--form-text);
+    outline: none;
+    z-index: 2;
+    transition: all 0.2s ease-in-out;
+    box-sizing: border-box;
+}
+
+/* Placeholder styles */
+.form-input::placeholder, input[type="text"]::placeholder, input[type="email"]::placeholder,
+input[type="password"]::placeholder, input[type="tel"]::placeholder {
+    color: rgba(47, 65, 86, 0.6);
+}
+
+/* Focus and hover states */
+.form-input:focus, .form-select:focus, input[type="text"]:focus, input[type="email"]:focus,
+input[type="password"]:focus, input[type="tel"]:focus, select:focus {
+    border-color: var(--form-focus);
+    box-shadow: 0 0 0 2px rgba(248, 178, 55, 0.2);
+}
+
+.form-input:hover, .form-select:hover, input[type="text"]:hover, input[type="email"]:hover,
+input[type="password"]:hover, input[type="tel"]:hover, select:hover {
+    border-color: rgba(248, 178, 55, 0.7);
+}
+
+/* Select specific styles */
+.form-select, select {
+    appearance: none;
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right 1.5rem center;
+    background-repeat: no-repeat;
+    background-size: 1rem;
+    padding-right: 3rem;
+}
+
+/* Bottom row */
+.bottom-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: end;
+    margin-top: 2rem;
+}
+
+/* Button container */
+.button-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    height: 100%;
+}
+
+.signup-button {
+    width: 208px;
+    height: 61px;
+    background-color: var(--form-accent);
+    border-radius: 28px;
+    border: none;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    color: #ffffff;
+    font-size: 28px;
+    transition: all 0.3s ease-in-out;
+}
+
+.signup-button:hover {
+    background-color: var(--form-accent-hover);
+}
+
+.signup-button:active {
+    transform: translateY(1px);
+}
+
+.signup-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(248, 178, 55, 0.5);
+}
+
+/* Login link */
+.login-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    height: 100%;
+}
+
+.login-link {
+    font-size: 16px;
+    font-weight: 700;
+    text-align: right;
+}
+
+.login-link .login-text {
+    color: #000000;
+}
+
+.login-link .login-button {
+    color: var(--form-accent);
+    text-decoration: underline;
+    cursor: pointer;
+    background: none;
+    border: none;
+    font: inherit;
+    transition: color 0.3s ease;
+}
+
+.login-link .login-button:hover {
+    color: var(--form-accent-hover);
+}
+
+/* Error messages */
+.text-danger {
+    color: #dc3545;
+    font-size: 14px;
+    margin-top: 5px;
+    font-weight: 400;
+}
+
+/* Responsive design */
+@media (max-width: 1200px) {
+    .form-panel {
+        padding: 0 2rem;
+    }
+
+    .blue-panel {
+        width: 400px;
+    }
+}
+
+@media (max-width: 768px) {
+    .register-container {
+        flex-direction: column;
+    }
+
+    .blue-panel {
+        width: 100%;
+        height: 200px;
+        order: -1;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .bottom-row {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        text-align: center;
+    }
+
+    .button-container, .login-container {
+        justify-content: center;
+    }
+
+    .login-link {
+        text-align: center;
+    }
+
+    .header h1 {
+        font-size: 28px;
+    }
+
+    .register-container {
+        flex-direction: column-reverse;
+    }
+}

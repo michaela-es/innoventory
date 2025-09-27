@@ -37,7 +37,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'users',
     'accounts'
 ]
 
@@ -52,7 +51,9 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'innoventory.urls'
-
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',

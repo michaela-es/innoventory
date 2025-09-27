@@ -1,16 +1,100 @@
-<h2>Login</h2>
-<form method="post">
-  {% csrf_token %}
-  {{ form.username.label_tag }}
-  {{ form.username }}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login - InnoVentory</title>
+  <link rel="stylesheet" href="{% static 'css/registerstyles.css' %}">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="register-container">
+  <div class="blue-panel">
+    <div class="blue-panel-content">
+      <div class="blue-panel-text">
+        <h1 class="blue-panel-title">
+          Welcome Back to<br>
+          <span class="accent-text">InnoVentory</span>
+        </h1>
+        <p class="blue-panel-subtitle">Manage your inventory with ease and efficiency</p>
+      </div>
+      <!-- You can add an image here if you want -->
+    </div>
+  </div>
 
-  {{ form.password.label_tag }}
-  {{ form.password }}
+  <div class="form-panel">
+    <div class="header">
+      <h1>Welcome Back!</h1>
+      <p>Sign in to your account</p>
+    </div>
 
-  <input type="checkbox" id="togglePassword"> Show Password
+    <!-- Display non-field errors -->
+    {% if form.non_field_errors %}
+    <div class="non-field-errors">
+      {% for error in form.non_field_errors %}
+      <div class="alert alert-danger">{{ error }}</div>
+      {% endfor %}
+    </div>
+    {% endif %}
 
-  <button type="submit">Login</button>
-</form>
+    <form method="POST" class="login-form">
+      {% csrf_token %}
+      
+      <!-- Username/Email Field -->
+      <div class="form-group {% if form.username.errors %}has-error{% endif %}">
+        <label class="input-label">
+          Username or Email
+        </label>
+        <div class="input-container">
+          <div class="input-shadow"></div>
+          {{ form.username }}
+        </div>
+        {% if form.username.errors %}
+          <div class="field-errors">
+            {% for error in form.username.errors %}
+              <div class="error-message">{{ error }}</div>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+
+      <!-- Password Field -->
+      <div class="form-group {% if form.password.errors %}has-error{% endif %}">
+        <label class="input-label">
+          Password
+        </label>
+        <div class="input-container">
+          <div class="input-shadow"></div>
+          {{ form.password }}
+        </div>
+        {% if form.password.errors %}
+          <div class="field-errors">
+            {% for error in form.password.errors %}
+              <div class="error-message">{{ error }}</div>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+
+      <!-- Show Password Checkbox -->
+      <div class="checkbox-group">
+        <label class="checkbox-label">
+          <input type="checkbox" id="togglePassword" class="checkbox-input">
+          <span class="checkbox-text">Show Password</span>
+        </label>
+      </div>
+
+      <div class="login-bottom">
+        <button type="submit" class="signup-button">Login</button>
+        
+        <div class="login-link">
+          <span class="login-text">Don't have an account? </span>
+<a href="{% url 'register' %}" class="login-button">Sign Up</a>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
 
 <script>
   const togglePassword = document.querySelector('#togglePassword');
@@ -24,3 +108,5 @@
     }
   });
 </script>
+</body>
+</html>
