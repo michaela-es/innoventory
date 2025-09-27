@@ -1,0 +1,26 @@
+<h2>Login</h2>
+<form method="post">
+  {% csrf_token %}
+  {{ form.username.label_tag }}
+  {{ form.username }}
+
+  {{ form.password.label_tag }}
+  {{ form.password }}
+
+  <input type="checkbox" id="togglePassword"> Show Password
+
+  <button type="submit">Login</button>
+</form>
+
+<script>
+  const togglePassword = document.querySelector('#togglePassword');
+  const passwordField = document.querySelector('input[name="password"]');
+
+  togglePassword.addEventListener('change', function() {
+    if (this.checked) {
+      passwordField.type = 'text';
+    } else {
+      passwordField.type = 'password';
+    }
+  });
+</script>
