@@ -13,8 +13,12 @@
 </head>
 <body>
   <div class="register-container">
-    <div class="blue-panel"></div>
-
+        <div class="blue-panel">
+            <h2 class="blue-panel-title">Smart Inventory <br>
+                <span class="accent-text">Smarter Business.</span></h2>
+            <p class="blue-panel-subtitle">Manage, track, and grow your business with ease.</p>
+            <img src="{% static 'users/images/login-img.png' %}" alt="Login Image">
+        </div>
     <div class="form-panel">
       <div class="header">
         <h1>Inno<span style="color: var(--form-accent);">Ventory</span></h1>
@@ -68,27 +72,5 @@
       </form>
     </div>
   </div>
-
-  <script>
-    document.getElementById('loginForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-
-      const username = document.getElementById('username').value.trim();
-      const password = document.getElementById('password').value.trim();
-
-      if (!username) {
-        alert('Please enter your username');
-        return;
-      }
-
-      if (!password) {
-        alert('Please enter your password');
-        return;
-      }
-
-      console.log('Login attempt:', { username, password });
-      alert('implement login functionality here');
-    });
-  </script>
 </body>
 </html>
