@@ -1,17 +1,17 @@
 from django.contrib.auth import views as auth_views
-from django.views.generic import CreateView
-from .forms import RegisterForm
 from django.contrib import messages
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from .forms import RegisterForm
 
-class LoginView(auth_views.LoginView):
-    template_name = 'accounts/login.html'
-    redirect_authenticated_user = True
+@login_required
+def dashboard(request):
+    return render(request, 'accounts/dashboard.html')
 
-class RegisterView(CreateView):
-    form_class = RegisterForm
-    template_name = 'accounts/register.html'
-    success_url = '/login/'
+def custom_login(request):
+    if request.user.is_authenticated:
+        return redirect('dashboard')
+    return auth_views.LoginView.as_view(template_name='accounts/login.html')(request)
 
 def register(request):
     if request.method == 'POST':
@@ -22,10 +22,8 @@ def register(request):
                 messages.success(request, 'Registration successful! You can now log in.')
                 return redirect('login')
             except Exception as e:
-                # This will catch any database-level errors
                 messages.error(request, f'Error during registration: {str(e)}')
         else:
-            # Print form errors to console for debugging
             print("Form errors:", form.errors)
             messages.error(request, 'Please correct the errors below.')
     else:

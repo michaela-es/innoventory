@@ -49,6 +49,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+LOGIN_REDIRECT_URL = '/accounts/dashboard/'
+LOGIN_URL = '/accounts/login/'
 
 ROOT_URLCONF = 'innoventory.urls'
 STATICFILES_DIRS = [
