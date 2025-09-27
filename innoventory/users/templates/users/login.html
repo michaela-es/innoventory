@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - InnoVentory</title>
+  <meta name="description" content="Login to your InnoVentory account. Access your inventory management system.">
+  <link rel="stylesheet" href="{% static 'users/css/loginstyles.css' %}" >
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="register-container">
+    <div class="blue-panel"></div>
+
+    <div class="form-panel">
+      <div class="header">
+        <h1>Inno<span style="color: var(--form-accent);">Ventory</span></h1>
+        <p>Let's login to your account.</p>
+      </div>
+
+      <form class="login-form" id="loginForm">
+        <div class="input-group">
+          <label class="input-label" for="username">Username</label>
+          <div class="input-container">
+            <div class="input-shadow"></div>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              class="form-input"
+              placeholder="Enter your username"
+              required
+            >
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label class="input-label" for="password">Password</label>
+          <div class="input-container">
+            <div class="input-shadow"></div>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              class="form-input"
+              placeholder="Enter your password"
+              required
+            >
+          </div>
+        </div>
+
+        <div class="login-bottom">
+          <button type="submit" class="signup-button" id="loginButton">
+            Login
+          </button>
+            <div class="login-link">
+                <span class="login-text">Don't have an account? </span>
+                    <a href="{% url 'register' %}" class="login-button-link">
+                        <button type="button" class="login-button">
+                            Sign-up now
+                        </button>
+                    </a>
+            </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value.trim();
+
+      if (!username) {
+        alert('Please enter your username');
+        return;
+      }
+
+      if (!password) {
+        alert('Please enter your password');
+        return;
+      }
+
+      console.log('Login attempt:', { username, password });
+      alert('implement login functionality here');
+    });
+  </script>
+</body>
+</html>
