@@ -18,7 +18,6 @@
         </h1>
         <p class="blue-panel-subtitle">Manage your inventory with ease and efficiency</p>
       </div>
-      <!-- You can add an image here if you want -->
     </div>
   </div>
 
@@ -28,31 +27,36 @@
       <p>Sign in to your account</p>
     </div>
 
+
     <!-- Display non-field errors -->
     {% if form.non_field_errors %}
-    <div class="non-field-errors">
+    <div class="non-field-errors" style="background: #f8d7da; color: #721c24; padding: 12px; border-radius: 5px; margin: 15px 0; border: 1px solid #f5c6cb;">
+      <strong>Login Error:</strong>
       {% for error in form.non_field_errors %}
-      <div class="alert alert-danger">{{ error }}</div>
+      <div>{{ error }}</div>
       {% endfor %}
     </div>
     {% endif %}
 
     <form method="POST" class="login-form">
       {% csrf_token %}
-      
-      <!-- Username/Email Field -->
+
+      <!-- Username Field -->
       <div class="form-group {% if form.username.errors %}has-error{% endif %}">
-        <label class="input-label">
-          Username
-        </label>
+        <label class="input-label">Username</label>
         <div class="input-container">
           <div class="input-shadow"></div>
-          {{ form.username }}
+          <input type="text"
+                 name="username"
+                 class="form-input {% if form.username.errors %}error-border{% endif %}"
+                 value="{{ form.username.value|default:'' }}"
+                 placeholder="Enter your username"
+                 required>
         </div>
         {% if form.username.errors %}
-          <div class="field-errors">
+          <div class="field-errors" style="color: #dc3545; font-size: 0.875rem; margin-top: 5px;">
             {% for error in form.username.errors %}
-              <div class="error-message">{{ error }}</div>
+              <div class="error-message" style="color: #dc3545; padding: 5px 0;">{{ error }}</div>
             {% endfor %}
           </div>
         {% endif %}
@@ -60,17 +64,19 @@
 
       <!-- Password Field -->
       <div class="form-group {% if form.password.errors %}has-error{% endif %}">
-        <label class="input-label">
-          Password
-        </label>
+        <label class="input-label">Password</label>
         <div class="input-container">
           <div class="input-shadow"></div>
-          {{ form.password }}
+          <input type="password"
+                 name="password"
+                 class="form-input {% if form.password.errors %}error-border{% endif %}"
+                 placeholder="Enter your password"
+                 required>
         </div>
         {% if form.password.errors %}
-          <div class="field-errors">
+          <div class="field-errors" style="color: #dc3545; font-size: 0.875rem; margin-top: 5px;">
             {% for error in form.password.errors %}
-              <div class="error-message">{{ error }}</div>
+              <div class="error-message" style="color: #dc3545; padding: 5px 0;">{{ error }}</div>
             {% endfor %}
           </div>
         {% endif %}
@@ -86,10 +92,10 @@
 
       <div class="login-bottom">
         <button type="submit" class="signup-button">Login</button>
-        
+
         <div class="login-link">
           <span class="login-text">Don't have an account? </span>
-<a href="{% url 'register' %}" class="login-button">Sign Up</a>
+          <a href="{% url 'register' %}" class="login-button">Sign Up</a>
         </div>
       </div>
     </form>
@@ -97,15 +103,41 @@
 </div>
 
 <script>
+  // Toggle password visibility
   const togglePassword = document.querySelector('#togglePassword');
   const passwordField = document.querySelector('input[name="password"]');
 
-  togglePassword.addEventListener('change', function() {
-    if (this.checked) {
-      passwordField.type = 'text';
-    } else {
-      passwordField.type = 'password';
-    }
+  if (togglePassword && passwordField) {
+    togglePassword.addEventListener('change', function() {
+      passwordField.type = this.checked ? 'text' : 'password';
+    });
+  }
+
+  // Clear errors when user starts typing
+  document.addEventListener('DOMContentLoaded', function() {
+    const inputs = document.querySelectorAll('input[type="text"], input[type="password"]');
+
+    inputs.forEach(input => {
+      input.addEventListener('input', function() {
+        // Clear field errors
+        const formGroup = this.closest('.form-group');
+        if (formGroup) {
+          formGroup.classList.remove('has-error');
+          const errorDiv = formGroup.querySelector('.field-errors');
+          if (errorDiv) {
+            errorDiv.style.opacity = '0';
+            setTimeout(() => errorDiv.remove(), 300);
+          }
+        }
+
+        // Clear non-field errors
+        const nonFieldErrors = document.querySelector('.non-field-errors');
+        if (nonFieldErrors) {
+          nonFieldErrors.style.opacity = '0';
+          setTimeout(() => nonFieldErrors.remove(), 300);
+        }
+      });
+    });
   });
 </script>
 </body>

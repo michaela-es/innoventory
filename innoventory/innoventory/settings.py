@@ -51,6 +51,7 @@ MIDDLEWARE = [
 ]
 LOGIN_REDIRECT_URL = '/accounts/dashboard/'
 LOGIN_URL = '/accounts/login/'
+LOGOUT_REDIRECT_URL = '/accounts/login/'
 
 ROOT_URLCONF = 'innoventory.urls'
 STATICFILES_DIRS = [

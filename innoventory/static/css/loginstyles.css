@@ -169,22 +169,6 @@ body {
     gap: 2rem;
     align-items: end;
 }
-
-/* Button */
-.signup-button {
-    width: 208px;
-    height: 61px;
-    background-color: var(--form-accent);
-    border-radius: 28px;
-    border: none;
-    cursor: pointer;
-    font-family: 'Inter', sans-serif;
-    font-weight: 700;
-    color: #ffffff;
-    font-size: 28px;
-    transition: all 0.3s ease-in-out;
-}
-
 .signup-button:hover {
     background-color: var(--form-accent-hover);
 }

@@ -6,4 +6,9 @@
         <li>System Settings</li>
         <li>View Reports</li>
     </ul>
+
+    <form method="post" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button type="submit">Log Out</button>
+    </form>
 </div>
