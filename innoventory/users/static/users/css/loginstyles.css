@@ -1,3 +1,4 @@
+/* Reset and base styles */
 * {
     margin: 0;
     padding: 0;
@@ -11,6 +12,7 @@ body {
     line-height: 1.5;
 }
 
+/* Design system colors */
 :root {
     --form-background: #ffffff;
     --form-panel: #567b8c;
@@ -23,6 +25,7 @@ body {
     --form-shadow: #567b8c;
 }
 
+/* Main container */
 .register-container {
     min-height: 100vh;
     width: 100%;
@@ -31,6 +34,7 @@ body {
     overflow: hidden;
 }
 
+/* Left panel - Form */
 .form-panel {
     flex: 1;
     display: flex;
@@ -40,8 +44,8 @@ body {
     position: relative;
 }
 
-
-.header {
+/* Header */
+    .header {
     text-align: center;
     margin-bottom: 4rem;
 }
@@ -59,6 +63,7 @@ body {
     color: var(--form-accent);
 }
 
+/* Form */
 .register-form {
     max-width: 712px;
     margin: 0 auto;
@@ -87,6 +92,7 @@ body {
     margin-bottom: 2rem;
 }
 
+/* Input field container */
 .input-group {
     position: relative;
     width: 100%;
@@ -100,6 +106,7 @@ body {
     margin-bottom: 0.5rem;
 }
 
+/* Input field with shadow */
 .input-container {
     position: relative;
 }
@@ -144,6 +151,7 @@ body {
     border-color: rgba(248, 178, 55, 0.7);
 }
 
+/* Select specific styles */
 .form-select {
     appearance: none;
     cursor: pointer;
@@ -154,11 +162,27 @@ body {
     padding-right: 3rem;
 }
 
+/* Bottom row */
 .bottom-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 2rem;
     align-items: end;
+}
+
+/* Button */
+.signup-button {
+    width: 208px;
+    height: 61px;
+    background-color: var(--form-accent);
+    border-radius: 28px;
+    border: none;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    color: #ffffff;
+    font-size: 28px;
+    transition: all 0.3s ease-in-out;
 }
 
 .signup-button:hover {
@@ -174,16 +198,17 @@ body {
     box-shadow: 0 0 0 2px rgba(248, 178, 55, 0.5);
 }
 
-.login-link {
+/* Login link */
+.signup-link {
     font-size: 16px;
     font-weight: 700;
 }
 
-.login-link .login-text {
+.signup-link .signup-text {
     color: #000000;
 }
 
-.login-link .login-button {
+.signup-link .login-button {
     color: var(--form-accent);
     text-decoration: underline;
     cursor: pointer;
@@ -191,10 +216,27 @@ body {
     border: none;
     font: inherit;
     transition: color 0.3s ease;
+    margin-right: 200px;
+    margin-top: 24px;
 }
 
-.login-link .login-button:hover {
+.signup-link .login-button:hover {
     color: var(--form-accent-hover);
+}
+
+
+.blue-panel {
+    width: 750px;
+    height: 100vh;
+    background: linear-gradient(135deg, var(--form-panel) 0%, #4a6b7a 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 2rem;
+    position: relative;
+    text-align: center;
+    color: white;
 }
 
 .blue-panel-content {
