@@ -7,7 +7,7 @@
     <title>Register</title>
     <!-- Optional Bootstrap CSS for nicer styling -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="{% static 'users/css/registerstyles.css' %}" rel="stylesheet"/>
+    <link rel="stylesheet" href="{% static 'users/css/registerstyles.css' %}" >
 </head>
 <body>
 <!--<div class="container mt-5">-->
@@ -22,7 +22,7 @@
     <div class="register-container">
         <div class="form-panel">
             <header class="header">
-                <h1>Nice to meet you!</h1>
+                <h1><b>Nice to meet you!</b></h1>
                 <p>Let's register your account.</p>
             </header>
 
@@ -129,7 +129,7 @@
                         </button>
                     </div>
                     <div class="login-link">
-                        <span class="login-text">Don't have an account? </span>
+                        <span class="login-text">Already have an account? </span>
                         <a href="{% url 'login' %}" class="login-button-link">
                             <button type="button" class="login-button">
                                 Login now
@@ -141,7 +141,12 @@
         </div>
 
         <!-- Right Panel - Blue Panel -->
-        <div class="blue-panel"></div>
+        <div class="blue-panel">
+            <h2 class="blue-panel-title">Smarter Business <br>
+                <span class="accent-text">Starts Here.</span></h2>
+            <p class="blue-panel-subtitle">Sign up today and simplify your inventory management.</p>
+            <img src="{% static 'users/images/register-img.png' %}" alt="Register Image">
+        </div>
     </div>
 </body>
 </html>

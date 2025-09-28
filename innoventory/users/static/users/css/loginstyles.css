@@ -12,6 +12,19 @@ body {
     line-height: 1.5;
 }
 
+.logo-container {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+}
+
+.logo-container img {
+    height: 120px;
+    width: auto;
+}
+
+
 /* Design system colors */
 :root {
     --form-background: #ffffff;
@@ -199,16 +212,16 @@ body {
 }
 
 /* Login link */
-.login-link {
+.signup-link {
     font-size: 16px;
     font-weight: 700;
 }
 
-.login-link .login-text {
+.signup-link .signup-text {
     color: #000000;
 }
 
-.login-link .login-button {
+.signup-link .login-button {
     color: var(--form-accent);
     text-decoration: underline;
     cursor: pointer;
@@ -216,14 +229,15 @@ body {
     border: none;
     font: inherit;
     transition: color 0.3s ease;
+    margin-right: 200px;
+    margin-top: 24px;
 }
 
-.login-link .login-button:hover {
+.signup-link .login-button:hover {
     color: var(--form-accent-hover);
 }
 
 
-/* Right panel - Blue panel */
 .blue-panel {
     width: 750px;
     height: 100vh;
@@ -284,7 +298,6 @@ body {
     transform: translateY(-5px);
 }
 
-/* Background decoration */
 .blue-panel::before {
     content: '';
     position: absolute;
@@ -309,7 +322,6 @@ body {
     z-index: 1;
 }
 
-/* Responsive design for blue panel */
 @media (max-width: 1200px) {
     .blue-panel {
         width: 500px;
