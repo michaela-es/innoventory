@@ -21,6 +21,7 @@ body {
     --form-border: #567b8c;
     --form-focus: #f8b237;
     --form-shadow: #567b8c;
+    --form-background: #ffffff;
 }
 
 /* Main container */
@@ -102,6 +103,7 @@ body {
 .input-container {
     position: relative;
     width: 100%;
+    min-height: 69px; /* Match input height */
 }
 
 .input-shadow {
@@ -221,10 +223,6 @@ body {
     text-align: right;
 }
 
-.login-link .login-text {
-    color: #000000;
-}
-
 .login-link .login-button {
     color: var(--form-accent);
     text-decoration: underline;
@@ -233,13 +231,14 @@ body {
     border: none;
     font: inherit;
     transition: color 0.3s ease;
+    margin-bottom: 16px;
+    margin-right: 10px;
 }
 
 .login-link .login-button:hover {
     color: var(--form-accent-hover);
 }
 
-/* Right panel - Blue panel */
 .blue-panel {
     width: 750px;
     height: 100vh;
@@ -300,7 +299,6 @@ body {
     transform: translateY(-5px);
 }
 
-/* Background decoration */
 .blue-panel::before {
     content: '';
     position: absolute;
@@ -325,7 +323,6 @@ body {
     z-index: 1;
 }
 
-/* Responsive design for blue panel */
 @media (max-width: 1200px) {
     .blue-panel {
         width: 500px;
@@ -344,14 +341,15 @@ body {
 @media (max-width: 768px) {
     .register-container {
         flex-direction: column;
+        width: 100%;
     }
 
     .blue-panel {
         width: 100%;
-        height: auto;
-        min-height: 400px;
+        height: 200px;
         order: -1;
         padding: 2rem 1.5rem;
+        min-height: 400px;
     }
 
     .blue-panel-content {
@@ -369,12 +367,38 @@ body {
     .blue-panel img {
         max-height: 250px;
     }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .bottom-row {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        text-align: center;
+        margin-top: 1rem;
+        align-items: center;
+    }
+
+    .button-container, .login-container {
+        justify-content: center;
+    }
+
+    .login-link {
+        text-align: center;
+    }
+
+    .header h1 {
+        font-size: 36px;
+    }
 }
 
 @media (max-width: 480px) {
     .blue-panel {
         padding: 1.5rem 1rem;
         min-height: 350px;
+        height: auto;
     }
 
     .blue-panel-title {
@@ -390,49 +414,7 @@ body {
     }
 }
 
-@media (max-width: 768px) {
-  .register-container {
-      flex-direction: column;
-    width: 100%;
-  }
-
-  .blue-panel {
-      height: 200px;
-      order: -1;
-    grid-template-columns: 1fr;
-  }
-
-  .form-grid {
-      gap: 1.5rem;
-    grid-template-columns: 1fr;
-  }
-
-  .bottom-row {
-      gap: 1.5rem;
-      --form-background: #ffffff;
-      text-align: center;
-  }
-
-  .button-container, .login-container {
-    justify-content: center;
-  }
-
-  .login-link {
-    text-align: center;
-  }
-
-  .header h1 {
-    font-size: 36px;
-  }
-}
-
-/* Additional alignment fixes for specific elements */
 .form-group:has(.form-select) .input-label,
 .form-group:has(.form-input) .input-label {
-    margin-bottom: 0.75rem; /* Consistent spacing */
-}
-
-/* Ensure all input containers have same height */
-.input-container {
-    min-height: 69px; /* Match input height */
+    margin-bottom: 0.75rem;
 }
