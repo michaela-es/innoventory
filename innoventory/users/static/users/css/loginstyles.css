@@ -12,6 +12,19 @@ body {
     line-height: 1.5;
 }
 
+.logo-container {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+}
+
+.logo-container img {
+    height: 120px;
+    width: auto;
+}
+
+
 /* Design system colors */
 :root {
     --form-background: #ffffff;
