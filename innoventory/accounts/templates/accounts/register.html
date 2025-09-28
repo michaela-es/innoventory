@@ -13,16 +13,23 @@
 
   <div class="form-panel">
     <div class="header">
-        <h1> Nice to meet you! </h1>
-<!--      <h1>Inno<span style="color: var(&#45;&#45;form-accent);">Ventory</span></h1>-->
+        <h1>Nice to meet you!</h1>
       <p>Let's Sign In Your Account!</p>
     </div>
 
-    <form method="POST" class="register-form">
+    {% if form.non_field_errors %}
+    <div class="non-field-errors">
+      {% for error in form.non_field_errors %}
+      <div class="alert alert-danger">{{ error }}</div>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <form method="POST" class="register-form" id="registerForm">
       {% csrf_token %}
       <div class="form-grid">
         {% for field in form %}
-          <div class="form-group">
+          <div class="form-group {% if field.errors %}has-error{% endif %}" data-field-id="{{ field.id_for_label }}">
             <label class="input-label">
               {{ field.label }}
               <div class="input-container">
@@ -31,7 +38,11 @@
               </div>
             </label>
             {% if field.errors %}
-              <div class="text-danger">{{ field.errors|striptags }}</div>
+              <div class="field-errors">
+                {% for error in field.errors %}
+                  <div class="error-message">{{ error }}</div>
+                {% endfor %}
+              </div>
             {% endif %}
           </div>
         {% endfor %}
@@ -51,5 +62,190 @@
     </form>
   </div>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('registerForm');
+    const inputs = form.querySelectorAll('input, select');
+
+    inputs.forEach(input => {
+        input.addEventListener('input', function() {
+            const formGroup = this.closest('.form-group');
+            if (formGroup && formGroup.classList.contains('has-error')) {
+                formGroup.classList.remove('has-error');
+
+                const errorDiv = formGroup.querySelector('.field-errors');
+                if (errorDiv) {
+                    errorDiv.style.opacity = '0';
+                    setTimeout(() => {
+                        errorDiv.remove();
+                    }, 300);
+                }
+            }
+        });
+
+        input.addEventListener('focus', function() {
+            const formGroup = this.closest('.form-group');
+            if (formGroup && formGroup.classList.contains('has-error')) {
+                formGroup.classList.remove('has-error');
+                const errorDiv = formGroup.querySelector('.field-errors');
+                if (errorDiv) {
+                    errorDiv.style.opacity = '0';
+                    setTimeout(() => {
+                        errorDiv.remove();
+                    }, 300);
+                }
+            }
+        });
+    });
+
+    const nonFieldErrors = document.querySelector('.non-field-errors');
+    if (nonFieldErrors) {
+        inputs.forEach(input => {
+            input.addEventListener('input', function() {
+                nonFieldErrors.style.opacity = '0';
+                setTimeout(() => {
+                    nonFieldErrors.remove();
+                }, 300);
+            });
+        });
+    }
+});
+</script>
+
+<style>
+/* Compact spacing */
+.form-panel {
+    padding: 1rem 2rem !important;
+    justify-content: flex-start !important;
+}
+
+.header {
+    margin-bottom: 1.5rem !important;
+}
+
+.header h1 {
+    font-size: 28px !important;
+    margin-bottom: 0.25rem !important;
+}
+
+.header p {
+    font-size: 16px !important;
+}
+
+.form-grid {
+    gap: 1rem !important;
+    margin-bottom: 1rem !important;
+}
+
+.form-group {
+    min-height: 100px !important;
+    margin-bottom: 0.25rem !important;
+}
+
+.input-label {
+    font-size: 16px !important;
+    margin-bottom: 0.5rem !important;
+}
+
+.input-container {
+    min-height: 60px !important;
+}
+
+.input-shadow {
+    height: 60px !important;
+    top: 6px !important;
+    left: 3px !important;
+}
+
+.form-input, .form-select, input[type="text"], input[type="email"],
+input[type="password"], input[type="tel"], select {
+    height: 60px !important;
+    padding: 15px 20px !important;
+    font-size: 14px !important;
+    border-radius: 25px !important;
+}
+
+.bottom-row {
+    margin-top: 1rem !important;
+    gap: 1rem !important;
+}
+
+.signup-button {
+    width: 180px !important;
+    height: 50px !important;
+    font-size: 24px !important;
+    border-radius: 25px !important;
+}
+
+/* Error styles */
+.has-error .input-shadow {
+    background-color: #dc3545 !important;
+    opacity: 0.3;
+}
+
+.has-error .form-input,
+.has-error .form-select {
+    border-color: #dc3545 !important;
+    background-color: #fff5f5 !important;
+}
+
+.field-errors {
+    margin-top: 5px !important;
+    animation: fadeIn 0.3s ease;
+}
+
+.error-message {
+    color: #dc3545;
+    font-size: 12px !important;
+    font-weight: 500;
+    padding: 6px 10px !important;
+    background-color: #fff5f5;
+    border-radius: 4px;
+    border-left: 3px solid #dc3545;
+    margin-top: 3px !important;
+}
+
+.non-field-errors {
+    background: #f8d7da;
+    color: #721c24;
+    padding: 10px !important;
+    border-radius: 5px;
+    margin: 10px 0 !important;
+    border: 1px solid #f5c6cb;
+    animation: fadeIn 0.3s ease;
+    font-size: 14px !important;
+}
+
+.field-errors,
+.non-field-errors {
+    transition: opacity 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .form-panel {
+        padding: 0.5rem 1rem !important;
+    }
+
+    .header {
+        margin-bottom: 1rem !important;
+    }
+
+    .header h1 {
+        font-size: 24px !important;
+    }
+
+    .form-group {
+        min-height: 90px !important;
+    }
+}
+</style>
+
 </body>
 </html>

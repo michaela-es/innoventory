@@ -1,3 +1,4 @@
+/* Reset & base styles */
 * {
     margin: 0;
     padding: 0;
@@ -9,6 +10,7 @@ body {
     background-color: #ffffff;
     color: #2f4156;
     line-height: 1.5;
+    overflow-x: hidden;
 }
 
 /* Design system colors */
@@ -21,6 +23,8 @@ body {
     --form-border: #567b8c;
     --form-focus: #f8b237;
     --form-shadow: #567b8c;
+    --error-color: #dc3545;
+    --error-bg: #fff5f5;
 }
 
 /* Main container - REVERSED ORDER */
@@ -29,14 +33,15 @@ body {
     width: 100%;
     display: flex;
     overflow: hidden;
-    flex-direction: row-reverse; /* This puts form on left, blue panel on right */
+    flex-direction: row-reverse;
 }
 
 /* Blue panel - Right side */
 .blue-panel {
-    width: 624px;
+    width: 15vw;
     height: 100vh;
     background-color: var(--form-panel);
+    flex-shrink: 0;
 }
 
 /* Form panel - Left side */
@@ -44,43 +49,45 @@ body {
     flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    padding: 0 4rem;
-    position: relative;
+    padding: 1rem 2rem !important; /* COMPACT OVERRIDE */
+    min-width: 0;
+    height: 100vh;
+    justify-content: flex-start !important; /* COMPACT OVERRIDE */
 }
 
 /* Header */
 .header {
     text-align: center;
-    margin-bottom: 4rem;
+    margin-bottom: 1.5rem !important; /* COMPACT OVERRIDE */
 }
 
 .header h1 {
-    font-size: 36px;
+    font-size: 28px !important; /* COMPACT OVERRIDE */
     font-weight: 700;
     color: var(--form-text);
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.25rem !important; /* COMPACT OVERRIDE */
 }
 
 .header p {
-    font-size: 18px;
+    font-size: 16px !important; /* COMPACT OVERRIDE */
     font-weight: 700;
     color: var(--form-accent);
 }
 
 /* Form */
 .register-form {
-    max-width: 712px;
+    max-width: 100%;
     margin: 0 auto;
     width: 100%;
+    min-height: 0;
 }
 
 /* Form grid */
 .form-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-    margin-bottom: 2rem;
+    gap: 1rem !important; /* COMPACT OVERRIDE */
+    margin-bottom: 1rem !important; /* COMPACT OVERRIDE */
 }
 
 /* Form groups */
@@ -88,46 +95,54 @@ body {
     display: flex;
     flex-direction: column;
     width: 100%;
-    margin-bottom: 1rem;
+    margin-bottom: 0.25rem !important; /* COMPACT OVERRIDE */
+    min-height: 100px !important; /* COMPACT OVERRIDE */
 }
 
+/* Input label */
 .input-label {
     display: block;
     color: var(--form-border);
-    font-size: 20px;
+    font-size: 16px !important; /* COMPACT OVERRIDE */
     font-weight: 400;
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.5rem !important; /* COMPACT OVERRIDE */
 }
 
-/* Input field with shadow */
+/* Input container & shadow */
 .input-container {
     position: relative;
     width: 100%;
-    min-height: 69px;
+    min-height: 60px !important; /* COMPACT OVERRIDE */
 }
 
 .input-shadow {
     position: absolute;
-    top: 8px;
-    left: 4px;
+    top: 6px !important; /* COMPACT OVERRIDE */
+    left: 3px !important; /* COMPACT OVERRIDE */
     width: 100%;
-    height: 69px;
+    height: 60px !important; /* COMPACT OVERRIDE */
     background-color: var(--form-shadow);
     border-radius: 29px;
     z-index: 1;
 }
 
-/* Style ALL form inputs including password fields */
-.form-input, .form-select, input[type="text"], input[type="email"], input[type="password"], input[type="tel"], select {
+/* Inputs and selects */
+.form-input,
+.form-select,
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="tel"],
+select {
     position: relative;
     width: 100%;
-    height: 69px;
+    height: 60px !important; /* COMPACT OVERRIDE */
     background-color: var(--form-input-bg);
-    border-radius: 29px;
+    border-radius: 25px !important; /* COMPACT OVERRIDE */
     border: 1px solid var(--form-border);
-    padding: 20px 25px;
+    padding: 15px 20px !important; /* COMPACT OVERRIDE */
     font-family: 'Inter', sans-serif;
-    font-size: 16px;
+    font-size: 14px !important; /* COMPACT OVERRIDE */
     color: var(--form-text);
     outline: none;
     z-index: 2;
@@ -136,20 +151,33 @@ body {
 }
 
 /* Placeholder styles */
-.form-input::placeholder, input[type="text"]::placeholder, input[type="email"]::placeholder,
-input[type="password"]::placeholder, input[type="tel"]::placeholder {
+.form-input::placeholder,
+input[type="text"]::placeholder,
+input[type="email"]::placeholder,
+input[type="password"]::placeholder,
+input[type="tel"]::placeholder {
     color: rgba(47, 65, 86, 0.6);
 }
 
 /* Focus and hover states */
-.form-input:focus, .form-select:focus, input[type="text"]:focus, input[type="email"]:focus,
-input[type="password"]:focus, input[type="tel"]:focus, select:focus {
+.form-input:focus,
+.form-select:focus,
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="tel"]:focus,
+select:focus {
     border-color: var(--form-focus);
     box-shadow: 0 0 0 2px rgba(248, 178, 55, 0.2);
 }
 
-.form-input:hover, .form-select:hover, input[type="text"]:hover, input[type="email"]:hover,
-input[type="password"]:hover, input[type="tel"]:hover, select:hover {
+.form-input:hover,
+.form-select:hover,
+input[type="text"]:hover,
+input[type="email"]:hover,
+input[type="password"]:hover,
+input[type="tel"]:hover,
+select:hover {
     border-color: rgba(248, 178, 55, 0.7);
 }
 
@@ -161,16 +189,22 @@ input[type="password"]:hover, input[type="tel"]:hover, select:hover {
     background-position: right 1.5rem center;
     background-repeat: no-repeat;
     background-size: 1rem;
-    padding-right: 3rem;
+    padding-right: 3rem !important; /* keep padding override */
 }
 
-/* Bottom row */
+/* Bottom row - sticky footer */
 .bottom-row {
+    flex-shrink: 0;
+    position: sticky;
+    bottom: 0;
+    background: white;
+    padding: 1rem 0 !important; /* COMPACT OVERRIDE */
+    z-index: 10;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 2rem;
+    gap: 1rem !important; /* COMPACT OVERRIDE */
     align-items: end;
-    margin-top: 2rem;
+    margin-top: 1rem !important; /* COMPACT OVERRIDE */
 }
 
 /* Button container */
@@ -181,18 +215,20 @@ input[type="password"]:hover, input[type="tel"]:hover, select:hover {
     height: 100%;
 }
 
+/* Signup button */
 .signup-button {
-    width: 208px;
-    height: 61px;
+    width: 180px !important; /* COMPACT OVERRIDE */
+    height: 50px !important; /* COMPACT OVERRIDE */
     background-color: var(--form-accent);
-    border-radius: 28px;
+    border-radius: 25px !important; /* COMPACT OVERRIDE */
     border: none;
     cursor: pointer;
     font-family: 'Inter', sans-serif;
     font-weight: 700;
     color: #ffffff;
-    font-size: 28px;
+    font-size: 24px !important; /* COMPACT OVERRIDE */
     transition: all 0.3s ease-in-out;
+    flex-shrink: 0;
 }
 
 .signup-button:hover {
@@ -240,18 +276,58 @@ input[type="password"]:hover, input[type="tel"]:hover, select:hover {
     color: var(--form-accent-hover);
 }
 
-/* Error messages */
-.text-danger {
-    color: #dc3545;
-    font-size: 14px;
-    margin-top: 5px;
-    font-weight: 400;
+/* Error styles */
+.has-error .input-shadow {
+    background-color: var(--error-color) !important;
+    opacity: 0.3;
+}
+
+.has-error .form-input,
+.has-error .form-select {
+    border-color: var(--error-color) !important;
+    background-color: var(--error-bg) !important;
+}
+
+.field-errors {
+    margin-top: 5px !important;
+    animation: fadeIn 0.3s ease;
+    max-height: 60px;
+    overflow: hidden;
+    transition: opacity 0.3s ease;
+}
+
+.error-message {
+    color: var(--error-color);
+    font-size: 12px !important;
+    font-weight: 500;
+    padding: 6px 10px !important;
+    background-color: var(--error-bg);
+    border-radius: 4px;
+    border-left: 3px solid var(--error-color);
+    margin-top: 3px !important;
+}
+
+.non-field-errors {
+    background: #f8d7da;
+    color: #721c24;
+    padding: 10px !important;
+    border-radius: 5px;
+    margin: 10px 0 !important;
+    border: 1px solid #f5c6cb;
+    animation: fadeIn 0.3s ease;
+    font-size: 14px !important;
+    transition: opacity 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 /* Responsive design */
 @media (max-width: 1200px) {
     .form-panel {
-        padding: 0 2rem;
+        padding: 1rem 2rem !important;
     }
 
     .blue-panel {
@@ -272,13 +348,14 @@ input[type="password"]:hover, input[type="tel"]:hover, select:hover {
 
     .form-grid {
         grid-template-columns: 1fr;
-        gap: 1rem;
+        gap: 1rem !important;
     }
 
     .bottom-row {
         grid-template-columns: 1fr;
-        gap: 1.5rem;
+        gap: 1.5rem !important;
         text-align: center;
+        position: relative;
     }
 
     .button-container, .login-container {
@@ -290,10 +367,18 @@ input[type="password"]:hover, input[type="tel"]:hover, select:hover {
     }
 
     .header h1 {
-        font-size: 28px;
+        font-size: 24px !important; /* COMPACT OVERRIDE for mobile */
     }
 
-    .register-container {
-        flex-direction: column-reverse;
+    .form-group {
+        min-height: 90px !important; /* COMPACT OVERRIDE for mobile */
+    }
+
+    .form-panel {
+        padding: 0.5rem 1rem !important; /* COMPACT OVERRIDE for mobile */
+    }
+
+    .header {
+        margin-bottom: 1rem !important; /* COMPACT OVERRIDE for mobile */
     }
 }
