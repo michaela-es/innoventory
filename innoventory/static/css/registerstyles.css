@@ -1,4 +1,3 @@
-/* Reset & base styles */
 * {
     margin: 0;
     padding: 0;
@@ -10,10 +9,8 @@ body {
     background-color: #ffffff;
     color: #2f4156;
     line-height: 1.5;
-    overflow-x: hidden;
 }
 
-/* Design system colors */
 :root {
     --form-panel: #567b8c;
     --form-input-bg: #f5f5f5;
@@ -27,233 +24,163 @@ body {
     --error-bg: #fff5f5;
 }
 
-/* Main container - REVERSED ORDER */
 .register-container {
     min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* equal width columns */
     width: 100%;
-    display: flex;
-    overflow: hidden;
-    flex-direction: row-reverse;
+    max-width: 700px;
+    margin: 0 auto;
 }
 
-/* Blue panel - Right side */
 .blue-panel {
-    width: 15vw;
-    height: 100vh;
     background-color: var(--form-panel);
-    flex-shrink: 0;
+    min-height: 100vh;
 }
 
-/* Form panel - Left side */
 .form-panel {
-    flex: 1;
+    padding: 2rem;
     display: flex;
     flex-direction: column;
-    padding: 1rem 2rem !important; /* COMPACT OVERRIDE */
-    min-width: 0;
-    height: 100vh;
-    justify-content: flex-start !important; /* COMPACT OVERRIDE */
+    justify-content: center;
 }
 
-/* Header */
 .header {
     text-align: center;
-    margin-bottom: 1.5rem !important; /* COMPACT OVERRIDE */
+    margin-bottom: 2rem;
 }
 
 .header h1 {
-    font-size: 28px !important; /* COMPACT OVERRIDE */
+    font-size: 1.75rem;
     font-weight: 700;
     color: var(--form-text);
-    margin-bottom: 0.25rem !important; /* COMPACT OVERRIDE */
+    margin-bottom: 0.5rem;
 }
 
 .header p {
-    font-size: 16px !important; /* COMPACT OVERRIDE */
+    font-size: 1rem;
     font-weight: 700;
     color: var(--form-accent);
 }
 
-/* Form */
 .register-form {
-    max-width: 100%;
-    margin: 0 auto;
     width: 100%;
-    min-height: 0;
+    max-width: 400px;
+    margin: 0 auto;
 }
 
-/* Form grid */
 .form-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem !important; /* COMPACT OVERRIDE */
-    margin-bottom: 1rem !important; /* COMPACT OVERRIDE */
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
 }
 
-/* Form groups */
 .form-group {
     display: flex;
     flex-direction: column;
-    width: 100%;
-    margin-bottom: 0.25rem !important; /* COMPACT OVERRIDE */
-    min-height: 100px !important; /* COMPACT OVERRIDE */
 }
 
-/* Input label */
 .input-label {
     display: block;
     color: var(--form-border);
-    font-size: 16px !important; /* COMPACT OVERRIDE */
-    font-weight: 400;
-    margin-bottom: 0.5rem !important; /* COMPACT OVERRIDE */
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
 }
 
-/* Input container & shadow */
 .input-container {
     position: relative;
     width: 100%;
-    min-height: 60px !important; /* COMPACT OVERRIDE */
 }
 
 .input-shadow {
     position: absolute;
-    top: 6px !important; /* COMPACT OVERRIDE */
-    left: 3px !important; /* COMPACT OVERRIDE */
+    top: 4px;
+    left: 2px;
     width: 100%;
-    height: 60px !important; /* COMPACT OVERRIDE */
+    height: 50px;
     background-color: var(--form-shadow);
-    border-radius: 29px;
+    border-radius: 25px;
     z-index: 1;
 }
 
-/* Inputs and selects */
 .form-input,
-.form-select,
-input[type="text"],
-input[type="email"],
-input[type="password"],
-input[type="tel"],
-select {
+.form-select {
     position: relative;
     width: 100%;
-    height: 60px !important; /* COMPACT OVERRIDE */
+    height: 50px;
     background-color: var(--form-input-bg);
-    border-radius: 25px !important; /* COMPACT OVERRIDE */
+    border-radius: 25px;
     border: 1px solid var(--form-border);
-    padding: 15px 20px !important; /* COMPACT OVERRIDE */
+    padding: 0 1.25rem;
     font-family: 'Inter', sans-serif;
-    font-size: 14px !important; /* COMPACT OVERRIDE */
+    font-size: 0.875rem;
     color: var(--form-text);
     outline: none;
     z-index: 2;
-    transition: all 0.2s ease-in-out;
-    box-sizing: border-box;
+    transition: all 0.2s ease;
 }
 
-/* Placeholder styles */
-.form-input::placeholder,
-input[type="text"]::placeholder,
-input[type="email"]::placeholder,
-input[type="password"]::placeholder,
-input[type="tel"]::placeholder {
+.form-input::placeholder {
     color: rgba(47, 65, 86, 0.6);
 }
 
-/* Focus and hover states */
 .form-input:focus,
-.form-select:focus,
-input[type="text"]:focus,
-input[type="email"]:focus,
-input[type="password"]:focus,
-input[type="tel"]:focus,
-select:focus {
+.form-select:focus {
     border-color: var(--form-focus);
     box-shadow: 0 0 0 2px rgba(248, 178, 55, 0.2);
 }
 
-.form-input:hover,
-.form-select:hover,
-input[type="text"]:hover,
-input[type="email"]:hover,
-input[type="password"]:hover,
-input[type="tel"]:hover,
-select:hover {
-    border-color: rgba(248, 178, 55, 0.7);
-}
-
-/* Select specific styles */
-.form-select, select {
+.form-select {
     appearance: none;
     cursor: pointer;
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
-    background-position: right 1.5rem center;
+    background-position: right 1rem center;
     background-repeat: no-repeat;
     background-size: 1rem;
-    padding-right: 3rem !important; /* keep padding override */
+    padding-right: 2.5rem;
 }
 
-/* Bottom row - sticky footer */
 .bottom-row {
-    flex-shrink: 0;
-    position: sticky;
-    bottom: 0;
-    background: white;
-    padding: 1rem 0 !important; /* COMPACT OVERRIDE */
-    z-index: 10;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 1rem !important; /* COMPACT OVERRIDE */
-    align-items: end;
-    margin-top: 1rem !important; /* COMPACT OVERRIDE */
+    gap: 1rem;
+    align-items: center;
+    margin-top: 1rem;
 }
 
-/* Button container */
 .button-container {
     display: flex;
     justify-content: flex-start;
-    align-items: flex-end;
-    height: 100%;
 }
 
-/* Signup button */
 .signup-button {
-    width: 180px !important; /* COMPACT OVERRIDE */
-    height: 50px !important; /* COMPACT OVERRIDE */
+    width: 140px;
+    height: 45px;
     background-color: var(--form-accent);
-    border-radius: 25px !important; /* COMPACT OVERRIDE */
+    border-radius: 25px;
     border: none;
     cursor: pointer;
     font-family: 'Inter', sans-serif;
     font-weight: 700;
     color: #ffffff;
-    font-size: 24px !important; /* COMPACT OVERRIDE */
-    transition: all 0.3s ease-in-out;
-    flex-shrink: 0;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
 }
 
 .signup-button:hover {
     background-color: var(--form-accent-hover);
+    transform: translateY(-1px);
 }
 
-.signup-button:active {
-    transform: translateY(1px);
-}
-
-.signup-button:focus {
-    outline: none;
-    box-shadow: 0 0 0 2px rgba(248, 178, 55, 0.5);
-}
-
-/* Login link */
 .login-container {
     display: flex;
     justify-content: flex-end;
-    align-items: flex-end;
-    height: 100%;
 }
 
 .login-link {
-    font-size: 16px;
+    font-size: 0.9rem;
     font-weight: 700;
     text-align: right;
 }
@@ -276,109 +203,94 @@ select:hover {
     color: var(--form-accent-hover);
 }
 
-/* Error styles */
 .has-error .input-shadow {
-    background-color: var(--error-color) !important;
+    background-color: var(--error-color);
     opacity: 0.3;
 }
 
 .has-error .form-input,
 .has-error .form-select {
-    border-color: var(--error-color) !important;
-    background-color: var(--error-bg) !important;
+    border-color: var(--error-color);
+    background-color: var(--error-bg);
 }
 
 .field-errors {
-    margin-top: 5px !important;
-    animation: fadeIn 0.3s ease;
-    max-height: 60px;
-    overflow: hidden;
-    transition: opacity 0.3s ease;
+    margin-top: 0.25rem;
 }
 
 .error-message {
     color: var(--error-color);
-    font-size: 12px !important;
+    font-size: 0.75rem;
     font-weight: 500;
-    padding: 6px 10px !important;
+    padding: 0.375rem 0.75rem;
     background-color: var(--error-bg);
     border-radius: 4px;
     border-left: 3px solid var(--error-color);
-    margin-top: 3px !important;
+    margin-top: 0.25rem;
 }
 
 .non-field-errors {
     background: #f8d7da;
     color: #721c24;
-    padding: 10px !important;
-    border-radius: 5px;
-    margin: 10px 0 !important;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    margin: 1rem 0;
     border: 1px solid #f5c6cb;
-    animation: fadeIn 0.3s ease;
-    font-size: 14px !important;
-    transition: opacity 0.3s ease;
+    font-size: 0.875rem;
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-10px); }
+    from { opacity: 0; transform: translateY(-5px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* Responsive design */
-@media (max-width: 1200px) {
-    .form-panel {
-        padding: 1rem 2rem !important;
-    }
-
-    .blue-panel {
-        width: 400px;
-    }
+.field-errors,
+.non-field-errors {
+    animation: fadeIn 0.3s ease;
 }
 
 @media (max-width: 768px) {
     .register-container {
-        flex-direction: column;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr;
     }
 
     .blue-panel {
-        width: 100%;
-        height: 200px;
-        order: -1;
+        min-height: 200px;
     }
 
-    .form-grid {
-        grid-template-columns: 1fr;
-        gap: 1rem !important;
+    .form-panel {
+        padding: 2rem 1.5rem;
     }
 
     .bottom-row {
         grid-template-columns: 1fr;
-        gap: 1.5rem !important;
+        gap: 1.5rem;
         text-align: center;
-        position: relative;
     }
 
-    .button-container, .login-container {
+    .button-container,
+    .login-container {
         justify-content: center;
     }
 
     .login-link {
         text-align: center;
     }
+}
+
+@media (max-width: 480px) {
+    .form-panel {
+        padding: 1.5rem 1rem;
+    }
 
     .header h1 {
-        font-size: 24px !important; /* COMPACT OVERRIDE for mobile */
+        font-size: 1.5rem;
     }
 
-    .form-group {
-        min-height: 90px !important; /* COMPACT OVERRIDE for mobile */
-    }
-
-    .form-panel {
-        padding: 0.5rem 1rem !important; /* COMPACT OVERRIDE for mobile */
-    }
-
-    .header {
-        margin-bottom: 1rem !important; /* COMPACT OVERRIDE for mobile */
+    .signup-button {
+        width: 120px;
+        height: 42px;
+        font-size: 1rem;
     }
 }
