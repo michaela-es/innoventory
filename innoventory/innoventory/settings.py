@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'users'
+    'accounts'
 ]
 
 MIDDLEWARE = [
@@ -49,9 +49,14 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+LOGIN_REDIRECT_URL = '/accounts/dashboard/'
+LOGIN_URL = '/accounts/login/'
+LOGOUT_REDIRECT_URL = '/accounts/login/'
 
 ROOT_URLCONF = 'innoventory.urls'
-
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -92,6 +97,7 @@ DATABASES = {
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
+AUTH_USER_MODEL = 'accounts.CustomUser'
 
 AUTH_PASSWORD_VALIDATORS = [
     {
