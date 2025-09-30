@@ -27,16 +27,48 @@ body {
 .register-container {
     min-height: 100vh;
     display: grid;
-    grid-template-columns: 1fr 1fr; /* equal width columns */
+    grid-template-columns: 1fr 1fr;
     width: 100%;
-    max-width: 700px;
     margin: 0 auto;
 }
 
 .blue-panel {
     background-color: var(--form-panel);
     min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
 }
+
+.blue-panel-content {
+    max-width: 400px;
+    width: 100%;
+}
+
+.blue-panel-text {
+    text-align: center;
+    color: white;
+}
+
+.blue-panel-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+}
+
+.blue-panel-title .accent-text {
+    color: var(--form-accent);
+}
+
+.blue-panel-subtitle {
+    font-size: 1.125rem;
+    font-weight: 400;
+    line-height: 1.6;
+    opacity: 0.9;
+}
+
 
 .form-panel {
     padding: 2rem;
@@ -65,20 +97,21 @@ body {
 
 .register-form {
     width: 100%;
-    max-width: 400px;
     margin: 0 auto;
 }
 
+/* Updated form grid for 2 columns */
 .form-grid {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 1rem;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem 1rem;
     margin-bottom: 1.5rem;
 }
 
 .form-group {
     display: flex;
     flex-direction: column;
+    min-width: 0; /* Prevent overflow */
 }
 
 .input-label {
@@ -216,6 +249,7 @@ body {
 
 .field-errors {
     margin-top: 0.25rem;
+    overflow: hidden; /* Prevent overflow */
 }
 
 .error-message {
@@ -227,6 +261,8 @@ body {
     border-radius: 4px;
     border-left: 3px solid var(--error-color);
     margin-top: 0.25rem;
+    word-wrap: break-word; /* Ensure long error messages wrap */
+    overflow-wrap: break-word;
 }
 
 .non-field-errors {
@@ -237,6 +273,7 @@ body {
     margin: 1rem 0;
     border: 1px solid #f5c6cb;
     font-size: 0.875rem;
+    grid-column: 1 / -1; /* Span full width in grid */
 }
 
 @keyframes fadeIn {
@@ -249,6 +286,12 @@ body {
     animation: fadeIn 0.3s ease;
 }
 
+/* Make full-width fields span both columns */
+.form-group.full-width {
+    grid-column: 1 / -1;
+}
+
+/* Responsive adjustments */
 @media (max-width: 768px) {
     .register-container {
         grid-template-columns: 1fr;
@@ -261,6 +304,12 @@ body {
 
     .form-panel {
         padding: 2rem 1.5rem;
+    }
+
+    /* Switch to single column on mobile */
+    .form-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
     }
 
     .bottom-row {
@@ -292,5 +341,9 @@ body {
         width: 120px;
         height: 42px;
         font-size: 1rem;
+    }
+
+    .form-grid {
+        gap: 0.75rem;
     }
 }
