@@ -7,7 +7,7 @@ from django.views.decorators.http import require_http_methods
 from .forms import ProductForm
 from .models import Product
 
-
+@login_required
 def product_list(request):
     products = Product.objects.all()
     return render(request, 'products/product_list.html', {'products': products})

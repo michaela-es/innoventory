@@ -7,21 +7,17 @@ from .forms import RegisterForm
 def dashboard(request):
     return render(request, 'accounts/dashboard.html')
 
-@login_not_required
 def custom_login(request):
     if request.user.is_authenticated:
         return redirect('dashboard')
     return auth_views.LoginView.as_view(template_name='accounts/login.html')(request)
 
-@login_not_required
 def register(request):
     if request.method == 'POST':
         form = RegisterForm(request.POST)
         if form.is_valid():
             try:
                 form.save()
-
-
                 messages.success(request, 'Registration successful! You can now log in.')
                 return redirect('login')
             except Exception as e:
