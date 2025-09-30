@@ -8,6 +8,13 @@ class ProductForm(forms.ModelForm):
         model = Product
         fields = ['name', 'category', 'description', 'price', 'stock_quantity', 'supplier']
 
+    widgets = {
+        'description': forms.Textarea(attrs={
+            'rows': 3,
+            'class': 'form-control',
+            'placeholder': 'Enter a brief description...'
+        }),
+    }
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in self.fields.values():
