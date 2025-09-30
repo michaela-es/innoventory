@@ -17,6 +17,20 @@
         th {
             background-color: #f4f4f4;
         }
+        /* Style for the button */
+        .add-button {
+            margin-top: 15px;
+            padding: 8px 16px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+        }
+        .add-button:hover {
+            background-color: #45a049;
+        }
     </style>
 </head>
 <body>
@@ -54,5 +68,7 @@
         </tbody>
     </table>
 
+    <!-- Add Product button -->
+<button onclick="window.location.href='{% url 'add_stock' %}'">Add Product</button>
 </body>
 </html>
