@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <title>Product List</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
     <style>
         table {
             width: 100%;
@@ -17,7 +18,6 @@
         th {
             background-color: #f4f4f4;
         }
-        /* Style for the button */
         .add-button {
             margin-top: 15px;
             padding: 8px 16px;
@@ -35,40 +35,55 @@
 </head>
 <body>
 
-    <h1>Product Inventory</h1>
+    <div class="container mt-3">
+        <h1>Product Inventory</h1>
 
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Category</th>
-                <th>Description</th>
-                <th>Price</th>
-                <th>Stock</th>
-                <th>Supplier</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for product in products %}
+        <table>
+            <thead>
                 <tr>
-                    <td>{{ product.product_id }}</td>
-                    <td>{{ product.name }}</td>
-                    <td>{{ product.category }}</td>
-                    <td>{{ product.description }}</td>
-                    <td>{{ product.price }}</td>
-                    <td>{{ product.stock_quantity }}</td>
-                    <td>{{ product.supplier.name }}</td>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Stock</th>
+                    <th>Supplier</th>
                 </tr>
-            {% empty %}
-                <tr>
-                    <td colspan="7">No products found.</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                {% for product in products %}
+                    <tr>
+                        <td>{{ product.product_id }}</td>
+                        <td>{{ product.name }}</td>
+                        <td>{{ product.category }}</td>
+                        <td>{{ product.description }}</td>
+                        <td>{{ product.price }}</td>
+                        <td>{{ product.stock_quantity }}</td>
+                        <td>{{ product.supplier.name }}</td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="7">No products found.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
 
-    <!-- Add Product button -->
-<button onclick="window.location.href='{% url 'add_stock' %}'">Add Product</button>
+        <button
+            class="add-button"
+            hx-get="{% url 'product_add_modal' %}"
+            hx-target="#modal-container"
+            hx-trigger="click"
+            data-bs-toggle="modal"
+            data-bs-target="#productModal"
+        >
+            Add Product
+        </button>
+    </div>
+
+    <div id="modal-container"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/htmx.org@1.9.2"></script>
 </body>
 </html>
