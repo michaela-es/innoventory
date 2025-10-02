@@ -208,20 +208,6 @@ body {
 
 
 /* Right panel - Blue panel */
-.blue-panel {
-    width: 750px;
-    height: 100vh;
-    background: linear-gradient(135deg, var(--form-panel) 0%, #4a6b7a 100%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 3rem 2rem;
-    position: relative;
-    text-align: center;
-    color: white;
-}
-
 .blue-panel-content {
     display: flex;
     flex-direction: column;
@@ -306,36 +292,6 @@ body {
 
     .blue-panel-subtitle {
         font-size: 1.1rem;
-    }
-}
-
-@media (max-width: 768px) {
-    .register-container {
-        flex-direction: column;
-    }
-
-    .blue-panel {
-        width: 100%;
-        height: auto;
-        min-height: 400px;
-        order: -1;
-        padding: 2rem 1.5rem;
-    }
-
-    .blue-panel-content {
-        gap: 2rem;
-    }
-
-    .blue-panel-title {
-        font-size: 2rem;
-    }
-
-    .blue-panel-subtitle {
-        font-size: 1rem;
-    }
-
-    .blue-panel img {
-        max-height: 250px;
     }
 }
 
