@@ -10,7 +10,7 @@ class ProductForm(forms.ModelForm):
 
     widgets = {
         'description': forms.Textarea(attrs={
-            'rows': 3,
+            'rows': 2,
             'class': 'form-control',
             'placeholder': 'Enter a brief description...'
         }),
