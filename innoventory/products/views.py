@@ -1,6 +1,8 @@
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
+from django.db import connection
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
+from django.urls import reverse
 from django.views.decorators.http import require_POST
 
 from .forms import ProductForm
@@ -28,3 +30,14 @@ def add_product(request):
         return HttpResponse('', status=204, headers={'HX-Refresh': 'true'})
     else:
         return render(request, 'products/partials/product_modal.html', {'form': form})
+
+
+@login_required
+@login_required
+def delete_product(request, pk):
+    try:
+        product = Product.objects.get(product_id=pk)
+        product.delete()
+    except Product.DoesNotExist:
+        pass
+    return HttpResponseRedirect(reverse('product_list'))
