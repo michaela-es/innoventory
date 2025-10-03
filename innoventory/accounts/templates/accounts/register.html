@@ -1,5 +1,5 @@
-{% load static %}
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -9,91 +9,119 @@
 </head>
 <body>
 
-<div class="register-container">
-
-
-  <div class="form-panel">
-    <div class="header">
-      <h1>Nice to meet you!</h1>
-      <p>Let's Sign In Your Account!</p>
+    <div class="logo-container">
+        <img src="{% static 'images/logo-placeholder.png' %}" alt="InnoVentory Logo">
     </div>
 
-    {% if form.non_field_errors %}
-      <div class="non-field-errors">
-        {% for error in form.non_field_errors %}
+    <div class="register-container">
+      <div class="blue-panel">
+          <h2 class="blue-panel-title slide-left">Smarter Business <br>
+              <span class="accent-text">Starts Here.</span></h2>
+          <p class="blue-panel-subtitle">Sign up today and simplify your inventory management.</p>
+          <img src="{% static 'images/register-img.png' %}" class ="register-img" alt="Register Image">
+
+      </div>
+
+
+      <div class="form-panel">
+        <div class="header">
+            <h1>Nice to meet you!</h1>
+          <p>Let's Sign In Your Account!</p>
+        </div>
+
+        {% if form.non_field_errors %}
+        <div class="non-field-errors">
+          {% for error in form.non_field_errors %}
           <div class="alert alert-danger">{{ error }}</div>
-        {% endfor %}
-      </div>
-    {% endif %}
+          {% endfor %}
+        </div>
+        {% endif %}
 
-    <form method="POST" class="register-form" id="registerForm">
-      {% csrf_token %}
-      <div class="form-grid">
-        {% for field in form %}
-          <div class="form-group {% if field.errors %}has-error{% endif %}">
-            {{ field.label_tag }}
-            {{ field }}
-            {% if field.errors %}
-              <div class="field-errors">
-                {% for error in field.errors %}
-                  <div class="error-message">{{ error }}</div>
-                {% endfor %}
+        <form method="POST" class="register-form" id="registerForm">
+          {% csrf_token %}
+          <div class="form-grid">
+            {% for field in form %}
+              <div class="form-group {% if field.errors %}has-error{% endif %}" data-field-id="{{ field.id_for_label }}">
+                <label class="input-label">
+                  {{ field.label }}
+                  <div class="input-container">
+                    <div class="input-shadow"></div>
+                    {{ field }}
+                  </div>
+                </label>
+                {% if field.errors %}
+                  <div class="field-errors">
+                    {% for error in field.errors %}
+                      <div class="error-message">{{ error }}</div>
+                    {% endfor %}
+                  </div>
+                {% endif %}
               </div>
-            {% endif %}
+            {% endfor %}
           </div>
-        {% endfor %}
-      </div>
 
-      <div class="bottom-row">
-        <button type="submit" class="signup-button">Register</button>
-        <p class="login-text">
-          Already have an account?
-          <a href="{% url 'login' %}" class="login-button">Login</a>
-        </p>
+          <div class="bottom-row">
+            <div class="button-container">
+              <button type="submit" class="signup-button scale-up-center">Register</button>
+            </div>
+            <div class="login-container">
+              <div class="login-link">
+                <span class="login-text">Already have an account? </span>
+                <a href="{% url 'login' %}" class="login-button">Login</a>
+              </div>
+            </div>
+          </div>
+        </form>
       </div>
-    </form>
-  </div>
-  <div class="blue-panel">
-    <div class="blue-panel-content">
-      <div class="blue-panel-text">
-        <h2 class="blue-panel-title">
-          Smarter Business <br>
-          <span class="accent-text">Starts Here.</span>
-        </h2>
-        <p class="blue-panel-subtitle"> Sign up today and simplify your inventory management.</p>
-      </div>
-    </div>
-  </div>
-</div>
 </div>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  const form = document.getElementById('registerForm');
-  const inputs = form.querySelectorAll('input, select');
+    const form = document.getElementById('registerForm');
+    const inputs = form.querySelectorAll('input, select');
 
-  inputs.forEach(input => {
-    input.addEventListener('input', clearErrors);
-    input.addEventListener('focus', clearErrors);
-  });
+    inputs.forEach(input => {
+        input.addEventListener('input', function() {
+            const formGroup = this.closest('.form-group');
+            if (formGroup && formGroup.classList.contains('has-error')) {
+                formGroup.classList.remove('has-error');
 
-  function clearErrors(event) {
-    const formGroup = event.target.closest('.form-group');
-    if (formGroup?.classList.contains('has-error')) {
-      formGroup.classList.remove('has-error');
-      const errorDiv = formGroup.querySelector('.field-errors');
-      if (errorDiv) {
-        errorDiv.style.opacity = '0';
-        setTimeout(() => errorDiv.remove(), 300);
-      }
-    }
+                const errorDiv = formGroup.querySelector('.field-errors');
+                if (errorDiv) {
+                    errorDiv.style.opacity = '0';
+                    setTimeout(() => {
+                        errorDiv.remove();
+                    }, 300);
+                }
+            }
+        });
+
+        input.addEventListener('focus', function() {
+            const formGroup = this.closest('.form-group');
+            if (formGroup && formGroup.classList.contains('has-error')) {
+                formGroup.classList.remove('has-error');
+                const errorDiv = formGroup.querySelector('.field-errors');
+                if (errorDiv) {
+                    errorDiv.style.opacity = '0';
+                    setTimeout(() => {
+                        errorDiv.remove();
+                    }, 300);
+                }
+            }
+        });
+    });
 
     const nonFieldErrors = document.querySelector('.non-field-errors');
     if (nonFieldErrors) {
-      nonFieldErrors.style.opacity = '0';
-      setTimeout(() => nonFieldErrors.remove(), 300);
+        inputs.forEach(input => {
+            input.addEventListener('input', function() {
+                nonFieldErrors.style.opacity = '0';
+                setTimeout(() => {
+                    nonFieldErrors.remove();
+                }, 300);
+            });
+        });
     }
-  }
 });
 </script>
 
