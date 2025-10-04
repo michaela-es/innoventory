@@ -65,10 +65,20 @@
                         <td>{{ product.name }}</td>
                         <td>{{ product.category }}</td>
                         <td>{{ product.description }}</td>
-                        <td>${{ product.price|floatformat:2|intcomma }}</td>
-                        <td>{{ product.stock_quantity }}</td>
+                        <td>{{ product.price|floatformat:2|intcomma }}</td>
+                        <td>{{ product.stock_quantity|intcomma }}</td>
                         <td>{{ product.supplier.name }}</td>
                         <td>
+
+                            <button class="btn btn-primary btn-sm edit-btn"
+                                    hx-get="{% url 'product_modal' product.pk %}"
+                                    hx-target="#modal-container"
+                                    hx-trigger="click"
+                                    title="Edit product">
+                                ✎
+                            </button>
+
+
                             <button class="btn btn-danger btn-sm delete-btn"
                                 data-bs-toggle="modal"
                                 data-bs-target="#deleteConfirmModal"
@@ -87,12 +97,10 @@
             </tbody>
         </table>
 
-        <button
-            class="add-button"
+        <button class="add-button"
             hx-get="{% url 'product_modal' %}"
             hx-target="#modal-container"
-            hx-trigger="click"
-        >
+            hx-trigger="click">
             Add Product
         </button>
     </div>
